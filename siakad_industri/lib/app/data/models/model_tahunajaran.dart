@@ -1,7 +1,7 @@
 class ModelTahunAjaran {
   bool? isError;
   String? message;
-  List<Data>? data;
+  List<DataTahunAjaran>? data;
 
   ModelTahunAjaran({this.isError, this.message, this.data});
 
@@ -9,9 +9,9 @@ class ModelTahunAjaran {
     isError = json['is_error'];
     message = json['message'];
     if (json['data'] != null) {
-      data = <Data>[];
+      data = <DataTahunAjaran>[];
       json['data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
+        data!.add(new DataTahunAjaran.fromJson(v));
       });
     }
   }
@@ -27,7 +27,7 @@ class ModelTahunAjaran {
   }
 }
 
-class Data {
+class DataTahunAjaran {
   int? id;
   String? name;
   String? deskripsi;
@@ -38,18 +38,15 @@ class Data {
   List<int>? writeUid;
   String? writeDate;
 
-  Data(
-      {this.id,
-      this.name,
-      this.deskripsi,
-      this.sLastUpdate,
-      this.displayName,
-      this.createUid,
-      this.createDate,
-      this.writeUid,
-      this.writeDate});
+  DataTahunAjaran({
+    this.id,
+    this.name,
+    this.deskripsi,
+    this.sLastUpdate,
+    this.displayName,
+  });
 
-  Data.fromJson(Map<String, dynamic> json) {
+  DataTahunAjaran.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     deskripsi = json['deskripsi'];
@@ -68,10 +65,7 @@ class Data {
     data['deskripsi'] = this.deskripsi;
     data['__last_update'] = this.sLastUpdate;
     data['display_name'] = this.displayName;
-    data['create_uid'] = this.createUid;
-    data['create_date'] = this.createDate;
-    data['write_uid'] = this.writeUid;
-    data['write_date'] = this.writeDate;
+
     return data;
   }
 }

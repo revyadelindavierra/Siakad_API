@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:siakad_industri/app/modules/TahunAjaran/views/tahun_ajaran_view.dart';
 import 'package:siakad_industri/app/modules/home/views/home_view.dart';
 import 'package:siakad_industri/app/modules/mapel/views/mapel_view.dart';
 import 'package:siakad_industri/app/modules/profile/views/profile_view.dart';
@@ -11,13 +12,16 @@ class BottombarView extends GetView<BottombarController> {
   const BottombarView({Key? key});
   @override
   Widget build(BuildContext context) {
+    final initialIndex = Get.arguments != null ? Get.arguments['index'] : 0;
+	controller.changeIndex(initialIndex);
+
     return GetBuilder<BottombarController>(
       builder: (controller) {
         return Scaffold(
           body: SafeArea(
             child: IndexedStack(
               index: controller.tabIndex,
-              children: [HomeView(), MapelView(), ProfileView()],
+              children: [HomeView(), MapelView(), TahunAjaranView()],
             ),
           ),
           bottomNavigationBar: BottomNavigationBar(

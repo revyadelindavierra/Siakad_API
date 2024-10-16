@@ -13,6 +13,7 @@ class MapelController extends GetxController {
   void onInit() {
     super.onInit();
     getMapel();
+    
   }
 
   void getMapel() {
@@ -22,6 +23,8 @@ class MapelController extends GetxController {
       isLoaded(true);
     });
   }
+
+  
 
   @override
   void onReady() {

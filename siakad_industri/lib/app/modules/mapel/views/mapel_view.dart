@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:siakad_industri/app/routes/app_pages.dart';
 import '../controllers/mapel_controller.dart';
 
 class MapelView extends GetView<MapelController> {
@@ -11,15 +12,16 @@ class MapelView extends GetView<MapelController> {
     	title: const Text('MATA PELAJARAN'),
     	centerTitle: true,
   	),
-  	body: Padding(
+  	body: Padding(//ini buat manggil controller nya dari mapel crotroler
     	padding: const EdgeInsets.all(8.0),
-    	child: Obx(
+    	child: Obx(//biar kalau di klik itu bisa ganti // value yang mau di listen  sama app nnya 
       	() {
-        	if (!controller.isLoaded.value) {
+        	if (!Get.isRegistered<MapelController>()) {
           	return Center(child: CircularProgressIndicator());
         	}
+	final controller = Get.find<MapelController>();
 
-        	if (controller.mapel.value.data == null || controller.mapel.value.data!.isEmpty) {
+        	if (controller.mapel.value.data == null || controller.mapel.value.data!.isEmpty) {//kalau controller.mapelnya eror pakai .value 
           	return Center(child: Text('Data kosong.'));
         	}
 
@@ -49,7 +51,7 @@ class MapelView extends GetView<MapelController> {
                       	'Guru Pengajar: ${element.guruId != null && element.guruId!.isNotEmpty ? element.guruId![1] : 'N/A'}',
                       	style: TextStyle(fontSize: 14),
                     	),
- 	SizedBox(height: 8),
+ 				SizedBox(height: 8),
                     	Text(
                       	'Keterangan: ${element.keterangan ?? 'N/A'}',
                       	style: TextStyle(fontSize: 14),
@@ -75,9 +77,18 @@ class MapelView extends GetView<MapelController> {
         	backgroundColor: Colors.red,
       	),
       	SizedBox(height: 10),
+      	FloatingActionButton(
+        	onPressed: () {
+          	Get.toNamed(Routes.MAPELTAMBAH);
+        	},
+        	child: Icon(Icons.add),
+        	backgroundColor: Colors.red,
+      	),
+      	SizedBox(height: 10),
     	],
   	),
   	floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+
 	);
   }
 }

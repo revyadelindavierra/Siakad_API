@@ -7,7 +7,7 @@ class MapelTambahView extends GetView<MapelTambahController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(  
       appBar: AppBar(
         title: const Text('Tambah Mapel'),
         centerTitle: true,

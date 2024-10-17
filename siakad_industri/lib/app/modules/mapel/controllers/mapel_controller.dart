@@ -13,10 +13,9 @@ class MapelController extends GetxController {
   void onInit() {
     super.onInit();
     getMapel();
-    
   }
 
-  void getMapel() {
+  Future<void> getMapel() async {
     isLoaded(false);
     RepositoryMapel().loadMapel().then((ModelMapel response) {
       mapel(response);
@@ -24,7 +23,13 @@ class MapelController extends GetxController {
     });
   }
 
-  
+  void updateMapel(int id, Map<String, dynamic> data) {
+    RepositoryMapel().updateMapel(id: id, body: data).then((response) {
+      if (response != null) {
+        getMapel();
+      }
+    });
+  }
 
   @override
   void onReady() {

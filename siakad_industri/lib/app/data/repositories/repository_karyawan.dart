@@ -27,4 +27,22 @@ class RepositoryKaryawan {
   }
 }
 
+Future<bool> updateKaryawan(int id, Map<String, dynamic> data) async {
+    String url = CORS_ANYWHERE + DOMAIN + '/send_request?model=hr.employee&id=$id';
+    var res = http.Request(
+      'PUT',
+      Uri.parse(url),
+    );
+    res.headers.addAll(defaultHeader);
+    res.body = jsonEncode(data);
+
+    http.StreamedResponse response = await res.send();
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+
 }
